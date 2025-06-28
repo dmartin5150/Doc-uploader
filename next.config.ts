@@ -1,7 +1,6 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Optional: allow CORS to local Python API
 };
 
-export default nextConfig;
+module.exports = nextConfig;
