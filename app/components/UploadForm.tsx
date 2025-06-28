@@ -1,6 +1,6 @@
-'use client';
-import { useState } from 'react';
-import { UploadResult } from '../types/UploadResult';
+"use client";
+import { useState } from "react";
+import { UploadResult } from "../types/UploadResult";
 
 interface UploadFormProps {
   onUpload: (result: UploadResult) => void;
@@ -14,14 +14,15 @@ export default function UploadForm({ onUpload }: UploadFormProps) {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
-    const res = await fetch('http://localhost:8000/upload', {
-      method: 'POST',
+    const res = await fetch("http://localhost:8000/upload", {
+      method: "POST",
       body: formData,
     });
 
-    const data = await res.json();
+    const data: UploadResult = await res.json();
+    console.log("Upload response:", data);
     onUpload(data);
   };
 

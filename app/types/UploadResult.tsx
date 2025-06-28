@@ -1,9 +1,5 @@
-// app/components/types.ts
-export type UploadResult =
-  | {
-      type: 'pdf' | 'fax';
-      data: string;
-    }
-  | {
-      error: string;
-    };
+import { UploadSuccess } from "./UploadSuccess";
+import { UploadError } from "./UploadError";
+
+
+export type UploadResult = UploadSuccess | UploadError;
