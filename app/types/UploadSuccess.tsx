@@ -1,6 +1,14 @@
-import { ExtractedData } from './ExtractedData';
+import { PdfExtractedData } from "./PDFExtractedData";
+import { TiffExtractedData } from "./TIFFExtractedData";
 
-export interface UploadSuccess {
-  type: 'pdf' | 'fax';
-  data: ExtractedData;
+export interface UploadSuccessPdf {
+  file_type: "pdf";
+  data: PdfExtractedData;
 }
+
+export interface UploadSuccessTiff {
+  file_type: "tiff";
+  data: TiffExtractedData;
+}
+
+export type UploadSuccess = UploadSuccessPdf | UploadSuccessTiff;

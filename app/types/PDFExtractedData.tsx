@@ -1,6 +1,6 @@
 import { InsuranceEntry } from './InsuranceEntry';
 
-export interface ExtractedData {
+export interface PdfExtractedData {
   patient_name: string;
   sex: string;
   dob: string;
