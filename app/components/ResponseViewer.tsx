@@ -1,12 +1,16 @@
 import { UploadResult } from "../types/UploadResult";
 import ReferralForm from "./ReferralForm";
-import ReferralTable from "./ReferralTable";
+import FieldForm from "./FieldForm";
 
 interface ResponseViewerProps {
   response: UploadResult | null;
+  filename: string | null;
 }
 
-export default function ResponseViewer({ response }: ResponseViewerProps) {
+export default function ResponseViewer({
+  response,
+  filename,
+}: ResponseViewerProps) {
   if (!response) return null;
 
   if ("error" in response) {
@@ -17,10 +21,14 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
     );
   }
 
+  const fileInfo = filename ? ` from: ${filename}` : "";
+
   if (response.file_type === "pdf") {
     return (
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Extracted Patient Information (Form)</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Patient Information Extracted{fileInfo}
+        </h2>
         <ReferralForm data={response.data} />
       </div>
     );
@@ -29,8 +37,13 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
   if (response.file_type === "tiff") {
     return (
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Extracted Data (Table)</h2>
-        <ReferralTable data={response.data} />
+        <h2 className="text-2xl font-semibold mb-4">
+          Patient Information Extracted
+          {filename && (
+            <span className="text-gray-600 font-normal"> from: {filename}</span>
+          )}
+        </h2>
+        <FieldForm data={response.data} />
       </div>
     );
   }
